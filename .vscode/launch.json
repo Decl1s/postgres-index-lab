@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Я разбираю измерения",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "index_lab",
+      "args": [
+        "demo",
+        "--output",
+        "workspace/debug"
+      ],
+      "cwd": "${workspaceFolder}",
+      "justMyCode": true
+    },
+    {
+      "name": "Я отлаживаю unit",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "unittest",
+      "args": [
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "${workspaceFolder}",
+      "justMyCode": true
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+[project]
+name = "postgres-index-lab"
+version = "0.1.0"
+description = "Я сравниваю планы PostgreSQL до и после частичного покрывающего индекса"
+requires-python = ">=3.12,<3.13"
+dependencies = []

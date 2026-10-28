@@ -1,0 +1,4 @@
+# Я использую только стандартную библиотеку Python 3.12.
+# Прямых и транзитивных Python distributions нет.
+# Для эксперимента мне нужны установленные PostgreSQL 16.x binaries:
+# postgres, initdb, pg_ctl, psql. Локально я проверил 16.15.
