@@ -9,7 +9,7 @@ from urllib.request import Request,urlopen
 from package_release import ROOT,archive
 
 REPOSITORY='Decl1s/postgres-index-lab'
-TAG='v0.1.0'
+TAG='v0.1.1'
 
 def main():
     if os.environ.get('GITHUB_REPOSITORY')!=REPOSITORY or os.environ.get('GITHUB_REF')!='refs/heads/main' or os.environ.get('GITHUB_EVENT_NAME')!='push':raise ValueError('RELEASE_CONTEXT')
@@ -34,7 +34,7 @@ def main():
         if error.code!=404:raise
         drafts=[r for r in api('/releases?per_page=100') if r['tag_name']==TAG]
         if len(drafts)>1:raise ValueError('RELEASE_AMBIGUOUS_DRAFT')
-        release=drafts[0] if drafts else api('/releases',method='POST',value={'tag_name':TAG,'target_commitish':sha,'name':'Моя лаборатория индексов PostgreSQL 0.1.0','draft':True,'prerelease':False,'body':'Я выпускаю учебный эксперимент с PostgreSQL 16: один SELECT до и после частичного покрывающего индекса. Я проверяю равенство упорядоченного результата, собираю JSON EXPLAIN ANALYZE BUFFERS, медианы прогретых запусков и размер индекса. Код запускает только свой временный кластер без TCP. Linux CI выполняет PostgreSQL-профиль, Windows — только unit и упаковку. Подробный разбор, ограничения и упражнения я оставил в NOTES.md. ZIP содержит только PUBLIC_FILES без БД, результатов, окружений и контактов.'})
+        release=drafts[0] if drafts else api('/releases',method='POST',value={'tag_name':TAG,'target_commitish':sha,'name':'Моя лаборатория индексов PostgreSQL 0.1.1','draft':True,'prerelease':False,'body':'Я обновил навигацию документации и согласовал patch-версию исходного архива. Бизнес-правила и зависимости я сохранил. Я выпускаю учебный эксперимент с PostgreSQL 16: один SELECT до и после частичного покрывающего индекса. Я проверяю равенство упорядоченного результата, собираю JSON EXPLAIN ANALYZE BUFFERS, медианы прогретых запусков и размер индекса. Код запускает только свой временный кластер без TCP. Linux CI выполняет PostgreSQL-профиль, Windows — только unit и упаковку. Подробный разбор, ограничения и упражнения я оставил в NOTES.md. ZIP содержит только PUBLIC_FILES без БД, результатов, окружений и контактов.'})
     if release['target_commitish']!=sha:raise ValueError('RELEASE_TARGET_CONFLICT')
     rid=release['id'];existing={v['name']:v for v in api('/releases/'+str(rid)+'/assets')}
     for name in (evidence['archive'],'SHA256SUMS'):
